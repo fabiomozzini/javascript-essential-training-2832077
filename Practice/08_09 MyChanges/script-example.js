@@ -13,50 +13,28 @@
  *  - Returns <figure> element to where function is called
  */
 
-const frogpack = {
-  name: "Frog Backpack",
-  volume: 8,
-  color: "green",
-  pocketNum: 3,
-  strapLength: {
-    left: 10,
-    right: 10,
-  },
-  lidOpen: false,
-  image: "../../assets/images/frog.svg",
-  description:
-    "A green kids backpack designed to make the lid look like the face of a frog sticking out its tongue.",
-  toggleLid: function (lidStatus) {
-    this.lidOpen = lidStatus;
-  },
-  newStrapLength: function (lengthLeft, lengthRight) {
-    this.strapLength.left = lengthLeft;
-    this.strapLength.right = lengthRight;
-  },
-};
+//Object 
+const myObj = {
+  company: "Amazon",
+  area: "Sales",
+  employees: 10000,
+  image: "../../assets/images/amazonlogo.png",
+  description: "From our home to yours!",
+}
 
 // Baseline HTML output
 const content = `
-    <h1 class="backpack__name">${frogpack.name}</h1>
-    <ul class="backpack__features">
-      <li class="packprop backpack__volume">Volume:<span> ${
-        frogpack.volume
-      }l</span></li>
-      <li class="packprop backpack__color">Color:<span> ${
-        frogpack.color
+    <h1 class="company">${myObj.company}</h1>
+    <ul class="company__features">
+      <li class="packprop company">Company: <span> ${
+        myObj.company
+      }<li</span></li>
+      <li class="packprop area">Area: <span> ${
+        myObj.area
       }</span></li>
-      <li class="packprop backpack__pockets">Number of pockets:<span> ${
-        frogpack.pocketNum
-      }</span></li>
-      <li class="packprop backpack__strap">Left strap length:<span> ${
-        frogpack.strapLength.left
-      } inches</span></li>
-      <li class="packprop backpack__strap">Right strap length:<span> ${
-        frogpack.strapLength.right
-      } inches</span></li>
-      <li class="feature backpack__lid">Lid status:<span> ${
-        frogpack.lidOpen ? "open" : "closed"
-      }</span></li>
+      <li class="packprop employees">Quantity of employees: <span> ${
+        myObj.employees
+      }
     </ul>  
 `;
 
@@ -66,16 +44,17 @@ const content = `
  * - Creates <figure> <img> <figcaption>
  * - Returns <figure>
  */
-const addFigure = (dataObj) => {
+const addFigure = (obj) => {
   let newFigure = document.createElement("figure");
   let newImg = document.createElement("img");
-  newImg.setAttribute("src", dataObj.image);
+  newImg.setAttribute("src", obj.image);
   newImg.setAttribute("alt", "");
   let newDesc = document.createElement("figcaption");
-  newDesc.innerText = dataObj.description;
+  newDesc.innerText = obj.description;
   newFigure.append(newImg, newDesc);
   return newFigure;
-};
+}
+
 
 /**
  * createArticle function
@@ -84,11 +63,12 @@ const addFigure = (dataObj) => {
  * - Calls addFigure()
  * - Returns <article>
  */
-const createArticle = (frogpack) => {
-  let newArticle = document.createElement("article");
-  newArticle.innerHTML = content;
-  newArticle.prepend(addFigure(frogpack));
-  return newArticle;
-};
 
-document.querySelector("main").append(createArticle(frogpack));
+const addArticle = () => {
+let newArticle = document.createElement("article");
+newArticle.innerHTML = content;
+newArticle.prepend(addFigure (myObj));
+return newArticle;
+}
+
+document.querySelector('main').append(addArticle(myObj))
