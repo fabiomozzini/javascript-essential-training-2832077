@@ -24,7 +24,8 @@ const frogpack = {
   },
   lidOpen: false,
   image: "../../assets/images/frog.svg",
-  description: "I am a great green fucking pack. Take me and use me as you wish!",
+  description:
+    "A green kids backpack designed to make the lid look like the face of a frog sticking out its tongue.",
   toggleLid: function (lidStatus) {
     this.lidOpen = lidStatus;
   },
@@ -59,25 +60,35 @@ const content = `
     </ul>  
 `;
 
-
-const createImage = (dataObj) => {
+/**
+ * addFigure function
+ * - Receives dataObj
+ * - Creates <figure> <img> <figcaption>
+ * - Returns <figure>
+ */
+const addFigure = (dataObj) => {
   let newFigure = document.createElement("figure");
-  let newImage = document.createElement ("img");
-  newImage.setAttribute("src", dataObj.image);
-  newImage.setAttribute("alt", "");
+  let newImg = document.createElement("img");
+  newImg.setAttribute("src", dataObj.image);
+  newImg.setAttribute("alt", "");
   let newDesc = document.createElement("figcaption");
-  newFigure.append(newImage, newDesc);
-  newDesc.innerHTML = dataObj.description;
-  return newFigure
-  }
+  newDesc.innerText = dataObj.description;
+  newFigure.append(newImg, newDesc);
+  return newFigure;
+};
 
-//Main Function
-const createArticle = (newArticle) => {
-newArticle = document.createElement ("article")
-newArticle.innerHTML = content;
-newArticle.prepend(createImage(frogpack))
-return newArticle;
-}
+/**
+ * createArticle function
+ * - Receives backpack object
+ * - Creates <article>
+ * - Calls addFigure()
+ * - Returns <article>
+ */
+const createArticle = (frogpack) => {
+  let newArticle = document.createElement("article");
+  newArticle.innerHTML = content;
+  newArticle.prepend(addFigure(frogpack));
+  return newArticle;
+};
 
-document.querySelector("main").append(createArticle(frogpack))
-
+document.querySelector("main").append(createArticle(frogpack));
